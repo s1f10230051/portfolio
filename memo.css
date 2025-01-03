@@ -1,0 +1,224 @@
+/* ベーススタイル */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; 
+
+  }
+
+
+
+  /* ヘッダーのスタイル */
+.fixed-header {
+  position: fixed; /* ヘッダーを画面上部に固定 */
+  top: 0;  /* 上部に固定 */
+  left: 0;
+  width: 100%; /* 横幅全体 */
+  background-color: #ff8585; /* 背景色 */
+  color: white;
+  text-align: center;
+  z-index: 1000; /* 他のコンテンツより前に表示されるように */
+}
+
+/* メインコンテンツ */
+main {
+  padding-top: 80px; /* ヘッダーの高さ分だけコンテンツを下げる */
+}
+
+
+
+
+  .container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
+  
+
+  .left {
+    flex: 0 0 60%; /* 50%幅を指定 */
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+  }
+  
+
+  .right {
+    flex: 0 0 40%; 
+    box-sizing: border-box;
+    height: 100%;
+    overflow-x: scroll; /* 横スクロールを有効化 */
+    overflow-y: hidden; /* 縦スクロールを無効化 */
+    white-space: nowrap; /* 子要素を横並びに */
+  }
+  
+
+
+  .image-slider {
+    
+    width: 300%; /* 100% × 画像の枚数 */
+    height: 100%;
+    display: flex;
+    scroll-snap-type: x mandatory; /* 横スクロールをスナップ化 */
+    animation-play-state: running; /* 初期状態ではアニメーション再生中 */
+    animation: slide 20s infinite;
+  }
+  
+  .image-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+/* アニメーション */
+@keyframes slide {
+  0%, 100% { transform: translateX(0); }       
+  33% { transform: translateX(-100%); }  
+  66% { transform: translateX(-200%); }
+}
+
+/*
+.right:hover .image-slider {
+  animation-play-state: paused;
+}
+  */
+  
+
+
+/* 名前の表示 */
+.name {
+  margin-left: 10px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 100px;
+  color: #2b2b2b;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.small_name {
+  font-size: 40px;
+  padding: 20px;
+  margin-left: 10px;
+  color: #666;
+}
+
+.slide-in-box {
+  position: absolute;
+  left: -300px; /* 初期位置（画面外） */
+  background-color: #fdafaf;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 12px;
+  transition: transform 1s ease, opacity 2s ease;
+  transform: translateX(0); /* デフォルトの位置 */
+  opacity: 0; /* 非表示 */
+}
+
+
+
+/* スライドインした状態 */
+.slide-in {
+  transform: translateX(300px); /* スライドイン位置 */
+  opacity: 1; /* 表示 */
+}
+
+
+.Job {
+  margin-left: 50px;
+}
+
+
+
+
+
+
+/* Intro画面のスタイル */
+.intro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2b2b2b; /* 一色の背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 48px;
+  font-weight: bold;
+  z-index: 100; /* 他のコンテンツより前面に表示 */
+  opacity: 1;
+  transition: opacity 1s ease;
+  transition: opacity 1s ease-out; /* フェードアウトのアニメーション */
+}
+
+/* メインコンテンツのスタイル */
+.main-content {
+  display: none; /* 最初は非表示 */
+  padding: 20px;
+}
+
+
+
+
+
+
+.intro-text.fade-out {
+  animation: squashText 0.2s ease-out forwards; /* 0.2秒でアニメーション */
+}
+
+/* アニメーションで文字が現れ、つぶれて消える */
+@keyframes showAndSquashText {
+  0% {
+    transform: scaleY(0); /* 初期状態：縮んでいる */
+    opacity: 0; /* 初期状態：透明 */
+  }
+  50% {
+    transform: scaleY(1); /* 半分まで拡大（現れる） */
+    opacity: 2; /* 半分まで不透明 */
+  }
+  100% {
+    transform: scaleY(0); /* 完全に縮小 */
+    opacity: 0; /* 完全に透明 */
+  }
+}
+
+/* 最初に現れる文字 */
+.intro-text {
+  animation: showAndSquashText 4s ease-out forwards; /* 3秒で現れ、つぶれて消える */
+  font-size: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column; /* 画面幅が768px以下で縦並びに変更 */
+  }
+
+  .left, .right {
+    width: 100%; /* 各セクションが100%幅に変更 */
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  header h1 {
+    font-size: 20px; /* 小さい画面で文字サイズを小さく */
+  }
+
+  footer p {
+    font-size: 12px; /* 小さい画面でフッターの文字サイズを小さく */
+  }
+}
